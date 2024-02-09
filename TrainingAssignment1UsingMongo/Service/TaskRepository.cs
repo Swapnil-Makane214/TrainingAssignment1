@@ -14,6 +14,11 @@ namespace TrainingAssignment1UsingMongo.Service
             this.MachineAssetFunctions = machineAssetFunctions;
         }
 
+        public List<Asset> GetAssets()
+        {
+            return MachineAssetFunctions!.GetAllAssets();
+        }
+
         public Machine GetMachine(string machineName)
         {
             return MachineAssetFunctions!.GetMachine(machineName);

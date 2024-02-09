@@ -36,7 +36,7 @@ namespace TrainingAssignment1Blazor.Pages
         }
         protected void HandleSelectionChange()
         {
-
+            NavigationManager.NavigateTo($"/AssetsForMachine/{selectedValue}", true);
         }
     }
 }

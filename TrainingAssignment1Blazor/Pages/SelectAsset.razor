@@ -1,6 +1,13 @@
 ﻿@page "/SelectAsset"
+@inject NavigationManager NavigationManager
 <h3>Select Asset</h3>
 
-@code {
+<select @bind="selectedValue" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+    <option selected disabled>Select</option>
+    @foreach (var item in set!)
+    {
+        <option value="@item">@item</option>
+    }
+</select>
 
-}
+<button class="btn btn-link" @onclick="HandleSelectionChange" disabled="@String.IsNullOrEmpty(selectedValue)">Click</button>

@@ -36,6 +36,26 @@ namespace TrainingAssignment1UsingMongo.Controllers
                 return StatusCode(500);
             }
             return Ok(machines);
+        } 
+        /// <summary>
+        /// Retrieves a list of Assets.
+        /// </summary>
+        /// <remarks>Returns a list of assets if successful.</remarks>
+        /// <response code="200">Returns the list of assets.</response>
+        /// <response code="500">If an internal server error occurs.</response>
+
+        [HttpGet("GetAssets")]
+        [ProducesResponseType(typeof(List<Asset>),200)]
+        [ProducesResponseType(500)]
+
+        public IActionResult GetAssets()
+        {
+            List<Asset> Assets = functions.GetAssets();
+            if(Assets is null)
+            {
+                return StatusCode(500);
+            }
+            return Ok(Assets);
         }
         /// <summary>
         /// Retrieves a machine by its name.
