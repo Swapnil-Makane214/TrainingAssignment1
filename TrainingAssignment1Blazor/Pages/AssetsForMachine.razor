@@ -1,0 +1,9 @@
+﻿@page "/AssetsForMachine/{machineName}"
+<h3>Assets For Machine @machineName</h3>
+
+<ul>
+    @foreach(var asset in machine!.assetsUsed!)
+    {
+        <li>@asset.assetName  @asset.series </li>
+    }
+</ul>

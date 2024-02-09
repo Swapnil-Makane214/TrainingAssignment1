@@ -1,0 +1,11 @@
+﻿@page "/MachinesForAsset/{assetName}"
+<h3>Machines For  @assetName</h3>
+
+<ul>
+    @foreach(var machineName in machinesForAsset)
+    {
+        <li>
+            @machineName
+        </li>
+    }
+</ul>
