@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Microsoft.AspNetCore.Components;
+using System.Text.Json;
 
 namespace TrainingAssignment1Blazor.Pages
 {
@@ -9,14 +10,28 @@ namespace TrainingAssignment1Blazor.Pages
         List<string> machines = new();
         protected override void OnInitialized()
         {
-            var response = client.GetAsync(url).Result;
-            if (response.IsSuccessStatusCode)
+           try
             {
-                var result = response.Content.ReadAsStringAsync().Result;
-                if (!string.IsNullOrEmpty(result))
+
+                var response = client.GetAsync(url).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    machines = JsonSerializer.Deserialize<List<string>>(result)!;
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        machines = JsonSerializer.Deserialize<List<string>>(result)!;
+                    }
                 }
+                else
+                {
+                    throw new Exception("No Data Found") { HResult = -1 };
+                }
+            }
+            catch(Exception ex) 
+            {
+                if (ex.HResult == -1)
+                    NavigationManager.NavigateTo($"/ErrorPage/{ex.Message}", true);
+                NavigationManager.NavigateTo($"/ErrorPage/", true);
             }
         }
     }

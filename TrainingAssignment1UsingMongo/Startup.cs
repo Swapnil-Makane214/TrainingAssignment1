@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.Threading.Tasks;
 using TrainingAssignment1UsingMongo.Interface;
 using TrainingAssignment1UsingMongo.Models;
 using TrainingAssignment1UsingMongo.Service;
@@ -19,7 +21,14 @@ namespace TrainingAssignment1UsingMongo
             // Add services to the container
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            //services.AddSwaggerGen();
+            services.AddSwaggerGen(option =>
+            {
+                var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentFilePath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
+                option.IncludeXmlComments(xmlCommentFilePath);
+            });
+
             services.Configure<Settings>(options =>
             {
                 options.connectionString = Configuration.GetSection("MongoDb:connectionString").Value;

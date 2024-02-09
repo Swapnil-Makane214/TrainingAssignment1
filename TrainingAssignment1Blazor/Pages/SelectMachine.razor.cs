@@ -1,42 +1,42 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Text.Json;
+using TrainingAssignment1Blazor.Models;
 
 namespace TrainingAssignment1Blazor.Pages
 {
-    public partial class MachinesForAsset
+    public partial class SelectMachine
     {
-        [Parameter]
-        public string? assetName { get; set; }
-        private string? url = "https://localhost:7107/api/GetMachinesUsesAsset/";
+        //public string? machineName { get; set; }
+        private string? url = "https://localhost:7107/api/GetMachines/";
         HttpClient httpClient = new HttpClient();
-        List<string> machinesForAsset = new();
+        List<Machine> machines = new();
+        public string? selectedValue { get; set; }
         protected override void OnInitialized()
         {
             try
             {
-                if(string.IsNullOrEmpty(assetName))
-                {
-                    throw new Exception($"Asset Name is required") { HResult=-1};
-                }
-                
-                var response = httpClient.GetAsync(url + assetName).Result;
+                var response = httpClient.GetAsync(url).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
-                    machinesForAsset = JsonSerializer.Deserialize<List<string>>(result)!;
+                    machines = JsonSerializer.Deserialize<List<Machine>>(result)!;
                 }
                 else
                 {
                     throw new Exception("No Data Found") { HResult = -1 };
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
                 if(ex.HResult== -1)
                 NavigationManager.NavigateTo($"/ErrorPage/{ex.Message}", true);
                 NavigationManager.NavigateTo($"/ErrorPage/", true);
             }
+        }
+        protected void HandleSelectionChange()
+        {
+
         }
     }
 }
