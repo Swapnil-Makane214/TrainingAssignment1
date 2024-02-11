@@ -10,10 +10,10 @@ namespace TrainingAssignment1UsingMongo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MachineController : ControllerBase
+    public class MachineAssetController : ControllerBase
     {
         readonly IMachineAssetRepository? machineAssetRepository;
-        public MachineController(MachineAssetRepository machineAssetRepository)
+        public MachineAssetController(MachineAssetRepository machineAssetRepository)
         {
             this.machineAssetRepository = machineAssetRepository;
         }

@@ -7,7 +7,6 @@ namespace TrainingAssignment1UsingMongo.Interface
     {
        
         public List<Machine> GetMachines();
-        public List<Asset> GetAssets();
         public Machine GetMachine(string machineName);
         public List<string> GetMachinesUsesAsset(string assetName);
         public List<string> GetMachineTypesWithLatestAssetSeries();

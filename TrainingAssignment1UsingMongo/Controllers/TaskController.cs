@@ -37,7 +37,7 @@ namespace TrainingAssignment1UsingMongo.Controllers
             }
             return Ok(machines);
         } 
-        /// <summary>
+       /* /// <summary>
         /// Retrieves a list of Assets.
         /// </summary>
         /// <remarks>Returns a list of assets if successful.</remarks>
@@ -56,7 +56,7 @@ namespace TrainingAssignment1UsingMongo.Controllers
                 return StatusCode(500);
             }
             return Ok(Assets);
-        }
+        }*/
         /// <summary>
         /// Retrieves a machine by its name.
         /// </summary>

@@ -15,33 +15,19 @@ namespace TrainingAssignment1UsingMongo.Service
         }
         public IMongoCollection<Machine> mongoCollection => Database.GetCollection<Machine>("Machine");
 
-        public bool CreateMachine(Machine machine)
+
+        public List<Machine> GetAllMachines()
         {
             try
             {
-                mongoCollection.InsertOne(machine);
-                return true;
+                List<Machine> machines = mongoCollection.Find(machine => true).ToList();
+                return machines;
             }
             catch
             {
-                return false;
+                return null!;
             }
         }
-
-        public bool DeleteMachine(string machineName)
-        {
-            try
-            {
-                var filter = Builders<Machine>.Filter.Eq(machine => machine.machineName, machineName);
-                mongoCollection.DeleteOne(filter);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public List<Asset> GetAllAssets()
         {
             try
@@ -64,20 +50,8 @@ namespace TrainingAssignment1UsingMongo.Service
             }
         }
 
-        public List<Machine> GetAllMachines()
-        {
-            try
-            {
-                List<Machine> machines = mongoCollection.Find(machine => true).ToList();
-                return machines;
-            }
-            catch
-            {
-                return null!;
-            }
-        }  
         
-
+       
         public Machine GetMachine(string machineName)
         {
             try
@@ -93,6 +67,18 @@ namespace TrainingAssignment1UsingMongo.Service
             }
         }
 
+        public bool CreateMachine(Machine machine)
+        {
+            try
+            {
+                mongoCollection.InsertOne(machine);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public bool UpdateMachine(string machineName, Machine machine)
         {
             try
@@ -114,5 +100,23 @@ namespace TrainingAssignment1UsingMongo.Service
                 return false;
             }
         }
+        public bool DeleteMachine(string machineName)
+        {
+            try
+            {
+                var filter = Builders<Machine>.Filter.Eq(machine => machine.machineName, machineName);
+                mongoCollection.DeleteOne(filter);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        
+
+
+       
     }
 }

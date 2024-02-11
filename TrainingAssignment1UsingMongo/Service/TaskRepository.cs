@@ -14,9 +14,10 @@ namespace TrainingAssignment1UsingMongo.Service
             this.MachineAssetFunctions = machineAssetFunctions;
         }
 
-        public List<Asset> GetAssets()
+       
+        public List<Machine> GetMachines()
         {
-            return MachineAssetFunctions!.GetAllAssets();
+            return MachineAssetFunctions!.GetAllMachines();
         }
 
         public Machine GetMachine(string machineName)
@@ -24,10 +25,6 @@ namespace TrainingAssignment1UsingMongo.Service
             return MachineAssetFunctions!.GetMachine(machineName);
         }
 
-        public List<Machine> GetMachines()
-        {
-            return MachineAssetFunctions!.GetAllMachines();
-        }
 
         public List<string> GetMachinesUsesAsset(string assetName)
         {
