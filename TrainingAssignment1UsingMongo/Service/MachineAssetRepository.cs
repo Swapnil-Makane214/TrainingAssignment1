@@ -14,6 +14,34 @@ namespace TrainingAssignment1UsingMongo.Service
             Database = client.GetDatabase(options.Value.database);
         }
         public IMongoCollection<Machine> mongoCollection => Database.GetCollection<Machine>("Machine");
+
+        public bool CreateMachine(Machine machine)
+        {
+            try
+            {
+                mongoCollection.InsertOne(machine);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteMachine(string machineName)
+        {
+            try
+            {
+                var filter = Builders<Machine>.Filter.Eq(machine => machine.machineName, machineName);
+                mongoCollection.DeleteOne(filter);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public List<Asset> GetAllAssets()
         {
             try
@@ -47,7 +75,8 @@ namespace TrainingAssignment1UsingMongo.Service
             {
                 return null!;
             }
-        }
+        }  
+        
 
         public Machine GetMachine(string machineName)
         {
@@ -61,6 +90,28 @@ namespace TrainingAssignment1UsingMongo.Service
             catch
             {
                 return null!;
+            }
+        }
+
+        public bool UpdateMachine(string machineName, Machine machine)
+        {
+            try
+            {
+                var filter = Builders<Machine>.Filter.Eq(machine => machine.machineName, machineName);
+                /*UpdateDefinition<Machine> set = Builders<Machine>.Update.Combine();
+                foreach (var property in machine.GetType().GetProperties())
+                {
+                    set = Builders<Machine>.Update.Set(property.Name, property.GetValue(machine));
+
+                }
+
+                var result=mongoCollection.UpdateOne(filter, set);*/
+                mongoCollection.ReplaceOne(filter, machine);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

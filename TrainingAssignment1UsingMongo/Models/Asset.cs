@@ -4,5 +4,6 @@
     {
         public string? assetName { get; set; }
         public string? series { get; set;}
+        
     }
 }

@@ -13,12 +13,12 @@ namespace TrainingAssignment1Blazor.Pages
         HttpClient httpClient = new HttpClient();
         protected override void OnInitialized()
         {
+            if (string.IsNullOrEmpty(machineName))
+            {
+                NavigationManager.NavigateTo($"/ErrorPage/Machine Name is required", true); 
+            }
             try
             {
-                if (string.IsNullOrEmpty(machineName))
-                {
-                    throw new Exception($"Machine Name is required") { HResult = -1 };
-                }
                 var response=httpClient.GetAsync(url+machineName).Result;
                 if(response.IsSuccessStatusCode)
                 {
@@ -30,14 +30,12 @@ namespace TrainingAssignment1Blazor.Pages
                 }
                 else
                 {
-                    throw new Exception("No Data Found") { HResult = -1 };
+                    NavigationManager.NavigateTo($"/ErrorPage/No Data Found", true); 
                 }
             }
-            catch(Exception ex) 
-            {
-                if (ex.HResult == -1)
-                    NavigationManager.NavigateTo($"/ErrorPage/{ex.Message}", true);
-                NavigationManager.NavigateTo($"/ErrorPage/", true);
+            catch
+            { 
+                NavigationManager.NavigateTo($"/ErrorPage", true);
             }
         }
     }

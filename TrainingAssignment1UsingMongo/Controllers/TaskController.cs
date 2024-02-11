@@ -137,5 +137,7 @@ namespace TrainingAssignment1UsingMongo.Controllers
                 return NotFound("Not found any machine with all latest series of assets");
             }
         }
+
+        
     }
 }

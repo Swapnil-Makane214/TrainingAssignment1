@@ -12,12 +12,12 @@ namespace TrainingAssignment1Blazor.Pages
         List<string> machinesForAsset = new();
         protected override void OnInitialized()
         {
+            if(string.IsNullOrEmpty(assetName))
+            {
+                NavigationManager!.NavigateTo($"/ErrorPage/Asset Name is required", true);
+            }
             try
             {
-                if(string.IsNullOrEmpty(assetName))
-                {
-                    throw new Exception($"Asset Name is required") { HResult=-1};
-                }
                 
                 var response = httpClient.GetAsync(url + assetName).Result;
                 if (response.IsSuccessStatusCode)
@@ -27,15 +27,12 @@ namespace TrainingAssignment1Blazor.Pages
                 }
                 else
                 {
-                    throw new Exception("No Data Found") { HResult = -1 };
+                    NavigationManager!.NavigateTo($"/ErrorPage/No Data Found", true);
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                
-                if(ex.HResult== -1)
-                NavigationManager.NavigateTo($"/ErrorPage/{ex.Message}", true);
-                NavigationManager.NavigateTo($"/ErrorPage/", true);
+                NavigationManager!.NavigateTo($"/ErrorPage");
             }
         }
     }

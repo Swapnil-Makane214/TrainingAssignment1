@@ -24,14 +24,12 @@ namespace TrainingAssignment1Blazor.Pages
                 }
                 else
                 {
-                    throw new Exception("No Data Found") { HResult = -1 };
+                    NavigationManager.NavigateTo($"/ErrorPage/No Data Found", true);
                 }
             }
-            catch(Exception ex) 
+            catch
             {
-                if (ex.HResult == -1)
-                    NavigationManager.NavigateTo($"/ErrorPage/{ex.Message}", true);
-                NavigationManager.NavigateTo($"/ErrorPage/", true);
+                NavigationManager.NavigateTo($"/ErrorPage", true);
             }
         }
     }
