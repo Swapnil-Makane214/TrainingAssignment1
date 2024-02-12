@@ -40,6 +40,28 @@ namespace TrainingAssignment1UsingMongo.Controllers
         }
 
         /// <summary>
+        /// Retrieves a list of assets.
+        /// </summary>
+        /// <remarks>Returns a list of assets if successful.</remarks>
+        /// <response code="200">Returns the list of assets.</response>
+        /// <response code="500">If an internal server error occurs.</response>
+
+        [HttpGet("GetAssets")]
+        [ProducesResponseType(typeof(List<Asset>), 200)]
+        [ProducesResponseType(500)]
+
+        public IActionResult GetAssets()
+        {
+            List<Asset> assets = machineAssetRepository!.GetAllAssets();
+            if (assets is null)
+            {
+                return StatusCode(500);
+            }
+            return Ok(assets);
+        }
+
+
+        /// <summary>
         /// Retrieves a machine by its name.
         /// </summary>
         /// <param name="machineName">The name of the machine to retrieve.</param>

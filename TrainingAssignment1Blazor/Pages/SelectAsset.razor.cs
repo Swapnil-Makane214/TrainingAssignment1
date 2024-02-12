@@ -6,7 +6,7 @@ namespace TrainingAssignment1Blazor.Pages
 {
     public partial class SelectAsset
     {
-        string url = "https://localhost:7107/api/GetAssets/";
+        string url = "https://localhost:7107/api/MachineAsset/GetAssets/";
         HttpClient httpClient = new HttpClient();
         //List<Asset> assets = new();
         public string? selectedValue { get; set; }

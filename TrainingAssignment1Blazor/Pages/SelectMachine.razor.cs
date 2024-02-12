@@ -7,7 +7,7 @@ namespace TrainingAssignment1Blazor.Pages
     public partial class SelectMachine
     {
         //public string? machineName { get; set; }
-        private string? url = "https://localhost:7107/api/GetMachines/";
+        private string? url = "https://localhost:7107/api/MachineAsset/GetMachines/";
         HttpClient httpClient = new HttpClient();
         List<Machine> machines = new();
         public string? selectedValue { get; set; }

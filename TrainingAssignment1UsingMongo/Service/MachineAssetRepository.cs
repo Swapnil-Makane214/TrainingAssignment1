@@ -39,7 +39,8 @@ namespace TrainingAssignment1UsingMongo.Service
                 {
                     foreach (var asset in machine.assetsUsed!)
                     {
-                        assets.Add(asset);
+                        if(assets.Where(a=> a.assetName==asset.assetName&&a.series==asset.series).Count()==0)
+                            assets.Add(asset);
                     }
                 }
                 return assets;

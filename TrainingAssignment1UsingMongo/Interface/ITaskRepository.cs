@@ -6,7 +6,7 @@ namespace TrainingAssignment1UsingMongo.Interface
     public interface ITaskRepository 
     {
        
-        public List<Machine> GetMachines();
+        //public List<Machine> GetMachines();
         public Machine GetMachine(string machineName);
         public List<string> GetMachinesUsesAsset(string assetName);
         public List<string> GetMachineTypesWithLatestAssetSeries();
